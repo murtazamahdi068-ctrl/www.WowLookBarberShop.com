@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111210">
+  <meta name="description" content="Discover Wow-Look Barber Shop in Houston’s Spring Branch community. Explore barbering and grooming services, see the shop, read customer feedback, and book your visit through Vagaro.">
+  <meta property="og:title" content="Wow-Look Barber Shop | Houston, TX">
+  <meta property="og:description" content="Look sharp. Feel confident. Professional barbering and grooming in Houston’s Spring Branch community.">
+  <meta property="og:type" content="website">
+  <title>Wow-Look Barber Shop | Houston, TX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111210;
+      --ink-soft: #181a17;
+      --panel: #1d1f1b;
+      --cream: #f3f1eb;
+      --muted: #aaa99f;
+      --gold: #c4a46b;
+      --gold-bright: #ddbd83;
+      --line: rgba(243, 241, 235, .13);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "DM Sans", sans-serif;
+      --display: "Manrope", sans-serif;
+      --wrap: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.no-scroll { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(var(--wrap), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 11px;
+      color: var(--gold-bright); font-size: 11px; letter-spacing: .19em;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .eyebrow::before { content: ""; width: 27px; height: 1px; background: var(--gold); }
+    .section { padding: 112px 0; }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 {
+      font-family: var(--display); font-weight: 600; letter-spacing: -.045em;
+      font-size: clamp(34px, 4vw, 56px); line-height: 1.08; margin: 19px 0 18px;
+    }
+    .section-intro { color: var(--muted); line-height: 1.8; max-width: 590px; font-size: 15px; }
+    .gold { color: var(--gold-bright); }
+
+    .topbar {
+      position: absolute; z-index: 10; top: 0; left: 0; width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      transition: background .25s, position .25s;
+    }
+    .topbar.scrolled {
+      position: fixed; background: rgba(17,18,16,.96); backdrop-filter: blur(12px);
+      border-color: var(--line);
+    }
+    .nav {
+      min-height: 82px; display: flex; align-items: center; justify-content: space-between;
+      gap: 30px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0;
+      font-family: var(--display); font-size: 17px; letter-spacing: .1em; font-weight: 800;
+    }
+    .brand-mark {
+      width: 32px; height: 32px; border: 1px solid var(--gold);
+      display: grid; place-items: center; color: var(--gold-bright); font-family: var(--serif);
+      font-size: 20px; line-height: 1; transform: rotate(45deg);
+    }
+    .brand-mark span { transform: rotate(-45deg); }
+    .nav-links { display: flex; align-items: center; gap: clamp(17px, 2.5vw, 34px); }
+    .nav-links a:not(.button) {
+      color: rgba(243,241,235,.78); font-size: 12px; transition: color .2s;
+    }
+    .nav-links a:not(.button):hover, .nav-links a.active { color: var(--gold-bright); }
+    .button {
+      min-height: 48px; padding: 0 23px; display: inline-flex; align-items: center;
+      justify-content: center; gap: 10px; border: 1px solid var(--gold);
+      background: var(--gold); color: #171713; font-weight: 700; font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase; transition: .22s ease;
+      cursor: pointer;
+    }
+    .button:hover { background: var(--gold-bright); border-color: var(--gold-bright); transform: translateY(-2px); }
+    .button-outline { background: transparent; border-color: rgba(243,241,235,.55); color: var(--cream); }
+    .button-outline:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+    .nav-cta { min-height: 42px; padding: 0 18px; }
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border: 1px solid var(--line);
+      color: var(--cream); background: transparent; cursor: pointer; align-items: center; justify-content: center;
+    }
+    .menu-toggle svg { width: 21px; height: 21px; }
+
+    .hero {
+      min-height: min(790px, 100svh); min-height: max(680px, 100svh);
+      position: relative; display: flex; align-items: center; overflow: hidden;
+      background: #222 url("https://www.designarena.ai/u/c4e56580-9284-4346-af2c-65c91992ea68") center 53% / cover no-repeat;
+    }
+    .hero::before {
+      position: absolute; content: ""; inset: 0;
+      background: linear-gradient(90deg, rgba(10,11,10,.87) 0%, rgba(10,11,10,.68) 40%, rgba(10,11,10,.24) 78%, rgba(10,11,10,.2) 100%),
+                  linear-gradient(0deg, rgba(10,11,10,.65), transparent 37%);
+    }
+    .hero-content { position: relative; z-index: 1; padding-top: 70px; max-width: 760px; }
+    .hero-kicker { margin-bottom: 25px; }
+    h1 {
+      font-family: var(--display); font-size: clamp(51px, 8vw, 98px); line-height: .99;
+      letter-spacing: -.065em; font-weight: 600; max-width: 790px; margin: 0 0 24px;
+    }
+    h1 em { font-family: var(--serif); font-weight: 400; color: var(--gold-bright); }
+    .hero-copy { max-width: 510px; color: rgba(243,241,235,.82); font-size: 16px; line-height: 1.8; margin-bottom: 31px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-proof {
+      display: flex; align-items: center; gap: 20px; margin-top: 48px; color: rgba(243,241,235,.78);
+      font-size: 12px;
+    }
+    .rating-stars { letter-spacing: 2px; color: var(--gold-bright); font-size: 14px; }
+    .proof-rating strong { color: var(--cream); font-size: 15px; margin-right: 5px; }
+    .proof-divider { height: 29px; width: 1px; background: rgba(255,255,255,.34); }
+
+    .trust-strip { background: #191a17; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .trust-inner { min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .trust-item { display: flex; align-items: center; gap: 13px; color: #d8d6ce; font-size: 12px; }
+    .trust-icon { color: var(--gold); width: 20px; height: 20px; }
+    .trust-item small { display: block; color: var(--muted); font-size: 10px; margin-top: 4px; }
+
+    .services { background: var(--cream); color: var(--ink); }
+    .services .eyebrow { color: #8d6e39; }
+    .services .eyebrow::before { background: #a18047; }
+    .services-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 39px; }
+    .services .section-intro { color: #68675f; }
+    .service-tabs { display: flex; gap: 7px; border-bottom: 1px solid rgba(17,18,16,.15); margin-bottom: 28px; overflow-x: auto; }
+    .service-tab {
+      flex: 0 0 auto; border: 0; padding: 14px 17px; background: transparent;
+      color: #77766f; font-size: 12px; cursor: pointer; border-bottom: 2px solid transparent;
+      transition: .2s;
+    }
+    .service-tab:hover, .service-tab[aria-selected="true"] { color: #171814; border-color: #a98549; }
+    .service-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(17,18,16,.13); }
+    .service-card {
+      background: var(--cream); min-height: 180px; padding: 29px 28px 26px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: background .2s;
+    }
+    .service-card:hover { background: #fffefa; }
+    .service-card-top { display: flex; justify-content: space-between; gap: 18px; align-items: start; }
+    .service-card h3 { font-family: var(--display); font-size: 17px; margin: 0; letter-spacing: -.02em; }
+    .service-index { color: #9b7c45; font-family: var(--serif); font-style: italic; font-size: 15px; }
+    .service-card p { color: #76756d; font-size: 13px; line-height: 1.7; margin: 18px 0 0; max-width: 330px; }
+    .service-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; }
+    .service-footer span { color: #85847b; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .text-link { color: #886a36; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .text-link:hover { color: #48351b; }
+
+    .gallery { background: var(--ink-soft); }
+    .gallery-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 39px; }
+    .gallery-grid {
+      display: grid; grid-template-columns: 1.15fr .85fr 1fr; grid-template-rows: 245px 245px;
+      gap: 12px;
+    }
+    .gallery-item {
+      position: relative; overflow: hidden; background: #292a26; cursor: pointer;
+      border: 0; padding: 0; color: white; text-align: left;
+    }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: 2 / 4; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+    .gallery-item:hover img { transform: scale(1.045); }
+    .gallery-item::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.55)); pointer-events: none; }
+    .gallery-label { position: absolute; z-index: 1; bottom: 19px; left: 20px; font-size: 11px; letter-spacing: .11em; text-transform: uppercase; }
+    .gallery-cta {
+      margin-top: 36px; border-top: 1px solid var(--line); padding-top: 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .gallery-cta h3 { font-family: var(--display); font-weight: 500; font-size: clamp(19px, 2.2vw, 25px); margin: 0; letter-spacing: -.03em; }
+
+    .why { background: #e8e5dc; color: var(--ink); }
+    .why-layout { display: grid; grid-template-columns: .86fr 1.14fr; gap: 85px; align-items: start; }
+    .why .eyebrow { color: #8d6e39; }
+    .why .eyebrow::before { background: #a18047; }
+    .why .section-intro { color: #68675f; }
+    .why-points { border-top: 1px solid rgba(17,18,16,.2); }
+    .why-point { display: grid; grid-template-columns: 52px 1fr; gap: 19px; padding: 23px 0; border-bottom: 1px solid rgba(17,18,16,.2); }
+    .why-point-num { color: #947645; font-family: var(--serif); font-style: italic; font-size: 17px; }
+    .why-point h3 { font-family: var(--display); font-size: 17px; margin: 0 0 7px; }
+    .why-point p { color: #6c6a63; line-height: 1.7; font-size: 13px; margin: 0; }
+
+    .reviews { background: #131411; }
+    .reviews-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 76px; align-items: center; }
+    .rating-panel { padding: 34px; border: 1px solid var(--line); background: #191a17; }
+    .rating-number { font-family: var(--display); font-size: 68px; letter-spacing: -.07em; line-height: 1; }
+    .rating-stars.large { font-size: 19px; margin: 14px 0; }
+    .rating-panel p { color: var(--muted); font-size: 13px; margin-bottom: 0; }
+    .reviews-note {
+      margin-top: 24px; padding-left: 19px; border-left: 1px solid var(--gold);
+      color: #c5c3bb; font-family: var(--serif); font-size: 19px; line-height: 1.65;
+    }
+    .reviews-note small { display: block; font-family: var(--sans); color: var(--muted); font-size: 11px; margin-top: 13px; }
+    .reviews .button { margin-top: 26px; }
+
+    .about { background: var(--ink-soft); }
+    .about-layout { display: grid; grid-template-columns: 1.05fr .95fr; gap: 75px; align-items: center; }
+    .about-photo { min-height: 470px; position: relative; overflow: hidden; }
+    .about-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .about-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.28), transparent 48%); }
+    .about-copy p { color: #b1b0a7; line-height: 1.9; font-size: 14px; }
+    .about-signoff { margin-top: 30px; display: flex; align-items: center; gap: 14px; color: var(--gold-bright); font-family: var(--serif); font-style: italic; }
+    .about-signoff::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
+
+    .location { background: var(--cream); color: var(--ink); }
+    .location .eyebrow { color: #8d6e39; }
+    .location .eyebrow::before { background: #a18047; }
+    .location-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: stretch; }
+    .location-copy { display: flex; flex-direction: column; align-items: start; }
+    .location-copy .section-intro { color: #68675f; }
+    .location-detail { padding: 19px 0; border-top: 1px solid rgba(17,18,16,.15); width: 100%; }
+    .location-detail:last-of-type { border-bottom: 1px solid rgba(17,18,16,.15); margin-bottom: 25px; }
+    .location-detail b { display: block; font-family: var(--display); font-size: 12px; margin-bottom: 8px; letter-spacing: .04em; }
+    .location-detail span, .location-detail a { color: #68675f; font-size: 13px; line-height: 1.6; }
+    .map-frame { min-height: 390px; background: #d8d5cc; }
+    .map-frame iframe { border: 0; width: 100%; height: 100%; min-height: 390px; filter: grayscale(100%) contrast(.9); }
+
+    .final-cta { padding: 79px 0; background: #1c1d19; border-top: 1px solid var(--line); }
+    .final-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 26px; }
+    .final-cta h2 { font-size: clamp(29px, 3.8vw, 46px); margin: 14px 0 0; }
+    .final-cta .eyebrow { font-size: 10px; }
+
+    footer { background: #0d0e0c; padding: 53px 0 25px; }
+    .footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: 38px; padding-bottom: 42px; }
+    .footer-brand-copy { color: #98978e; font-size: 12px; line-height: 1.75; max-width: 245px; margin-top: 18px; }
+    .footer-col h3 { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--gold-bright); margin: 6px 0 19px; }
+    .footer-col a, .footer-col p { display: block; color: #aaa99f; font-size: 12px; margin: 0 0 12px; line-height: 1.6; }
+    .footer-col a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; gap: 16px; color: #77776f; font-size: 10px; }
+
+    .lightbox {
+      position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.92);
+      display: none; align-items: center; justify-content: center; padding: 28px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: min(100%, 1000px); max-height: 82vh; object-fit: contain; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 22px; width: 46px; height: 46px;
+      border: 1px solid rgba(255,255,255,.3); background: transparent; color: white;
+      font-size: 25px; cursor: pointer;
+    }
+    .lightbox-caption { position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; color: #ccc; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+    .toast {
+      position: fixed; z-index: 40; bottom: 22px; left: 50%; transform: translate(-50%, 20px);
+      padding: 13px 18px; background: var(--cream); color: var(--ink); font-size: 13px;
+      opacity: 0; pointer-events: none; transition: .25s;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 16px; }
+      .nav-links a:not(.button) { font-size: 11px; }
+      .nav-cta { padding: 0 13px; font-size: 9px; }
+      .why-layout, .reviews-layout { gap: 45px; }
+      .about-layout { gap: 42px; }
+      .footer-main { grid-template-columns: 1.4fr 1fr 1fr; }
+      .footer-col:last-child { grid-column: 2 / 4; }
+    }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 36px, var(--wrap)); }
+      .section { padding: 78px 0; }
+      .nav { min-height: 70px; }
+      .menu-toggle { display: inline-flex; margin-left: auto; }
+      .nav-links {
+        display: none; position: absolute; top: 69px; left: 0; right: 0; padding: 18px 20px 22px;
+        background: rgba(17,18,16,.98); border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.button) { padding: 13px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .nav-links .nav-cta { margin-top: 15px; }
+      .hero { min-height: 770px; min-height: 100svh; background-position: 58% center; }
+      .hero::before { background: linear-gradient(90deg, rgba(10,11,10,.84), rgba(10,11,10,.48)), linear-gradient(0deg, rgba(10,11,10,.56), transparent 65%); }
+      .hero-content { padding-top: 78px; }
+      h1 { font-size: clamp(48px, 12vw, 76px); }
+      .hero-copy { font-size: 14px; }
+      .hero-proof { gap: 13px; flex-wrap: wrap; margin-top: 37px; }
+      .trust-inner { padding: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+      .trust-item { font-size: 11px; }
+      .services-head, .gallery-head { display: block; }
+      .services-head .button { margin-top: 20px; }
+      .service-list { grid-template-columns: 1fr; }
+      .service-card { min-height: 155px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 170px 190px; gap: 8px; }
+      .gallery-item:first-child { grid-row: span 2; }
+      .gallery-item:nth-child(4) { grid-column: 1 / 3; }
+      .gallery-label { bottom: 13px; left: 13px; font-size: 9px; }
+      .gallery-cta { align-items: start; flex-direction: column; }
+      .why-layout, .reviews-layout, .about-layout, .location-layout { grid-template-columns: 1fr; gap: 35px; }
+      .why-layout { gap: 31px; }
+      .rating-panel { padding: 27px; }
+      .about-photo { min-height: 320px; order: 2; }
+      .about-copy { order: 1; }
+      .map-frame, .map-frame iframe { min-height: 320px; }
+      .final-cta { padding: 62px 0; }
+      .final-cta-inner { align-items: start; flex-direction: column; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+      .footer-main > div:first-child { grid-column: 1 / 3; }
+      .footer-col:last-child { grid-column: auto; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" id="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Wow-Look Barber Shop home">
+        <span class="brand-mark"><span>W</span></span><span>WOW-LOOK</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M3 7h18M3 12h18M3 17h18"></path>
+        </svg>
+      </button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#location">Location</a>
+        <a class="button nav-cta" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book now <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-label="Wow-Look Barber Shop">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="eyebrow hero-kicker">Barbering in Houston, Texas</div>
+          <h1>LOOK SHARP.<br><em>FEEL CONFIDENT.</em></h1>
+          <p class="hero-copy">Professional barbering and grooming in Houston’s Spring Branch community. Find your next look with the Wow-Look team.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book an appointment <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" href="https://www.google.com/maps/search/?api=1&query=Wow-Look+Barber+Shop+Houston+TX" target="_blank" rel="noopener">Call now <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-proof" aria-label="Google rating 4.7 out of 5, more than 110 customer reviews">
+            <div class="proof-rating"><span class="rating-stars">★★★★★</span> <strong>4.7</strong><br><span>Google rating</span></div>
+            <span class="proof-divider"></span>
+            <div><strong>110+</strong><br><span>customer reviews</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip" aria-label="Shop highlights">
+      <div class="wrap trust-inner">
+        <div class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8m0-12.8L5.6 18.4"/></svg>
+          <div>Barbering & grooming<small>Services for your next look</small></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.3"/></svg>
+          <div>Houston, Texas<small>Spring Branch community</small></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.64 5.64l2.12 2.12m8.48 8.48 2.12 2.12m0-12.72-2.12 2.12m-8.48 8.48-2.12 2.12"/><circle cx="12" cy="12" r="4"/></svg>
+          <div>Easy online booking<small>Appointments through Vagaro</small></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>
+          <div>4.7 Google rating<small>From 110+ customer reviews</small></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section services" id="services">
+      <div class="wrap">
+        <div class="services-head">
+          <div>
+            <div class="eyebrow">Made for your style</div>
+            <h2>OUR SERVICES</h2>
+            <p class="section-intro">From a clean refresh to the details that finish a look, explore the services available at Wow-Look.</p>
+          </div>
+          <a class="button" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book an appointment <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="service-tabs" role="tablist" aria-label="Service categories">
+          <button class="service-tab" role="tab" aria-selected="true" data-category="haircuts">Haircuts</button>
+          <button class="service-tab" role="tab" aria-selected="false" data-category="grooming">Beard &amp; Grooming</button>
+          <button class="service-tab" role="tab" aria-selected="false" data-category="specialty">Specialty Services</button>
+        </div>
+        <div class="service-list" id="serviceList" aria-live="polite"></div>
+        <noscript><p>Explore available haircuts, beard and grooming, and specialty services through our Vagaro booking page.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section gallery" id="gallery">
+      <div class="wrap">
+        <div class="gallery-head">
+          <div>
+            <div class="eyebrow">In the chair</div>
+            <h2>THE WOW-LOOK<br>EXPERIENCE</h2>
+          </div>
+          <p class="section-intro">A closer look at the shop, the craft, and the details behind a fresh cut. Select a photo to view it larger.</p>
+        </div>
+        <div class="gallery-grid">
+          <button class="gallery-item" data-caption="A look inside Wow-Look Barber Shop">
+            <img src="https://www.designarena.ai/u/c4e56580-9284-4346-af2c-65c91992ea68" alt="Inside Wow-Look Barber Shop, with barber stations and clients in the chairs" loading="lazy">
+            <span class="gallery-label">Inside the shop</span>
+          </button>
+          <button class="gallery-item" data-caption="The barbershop craft">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=950&q=85" alt="Barber carefully shaping a client's haircut" loading="lazy">
+            <span class="gallery-label">The craft</span>
+          </button>
+          <button class="gallery-item" data-caption="Precision in the details">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=950&q=85" alt="Close-up of a barber working on a haircut" loading="lazy">
+            <span class="gallery-label">The details</span>
+          </button>
+          <button class="gallery-item" data-caption="A considered cut, from every angle">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1450&q=85" alt="Modern barbershop interior with professional barber stations" loading="lazy">
+            <span class="gallery-label">The atmosphere</span>
+          </button>
+        </div>
+        <div class="gallery-cta">
+          <h3>READY FOR YOUR NEXT LOOK?</h3>
+          <a class="button" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book an appointment <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why" id="why">
+      <div class="wrap why-layout">
+        <div>
+          <div class="eyebrow">The difference is in the details</div>
+          <h2>WHY<br>WOW-LOOK?</h2>
+          <p class="section-intro">A great barbershop visit starts with listening. Here’s what you can expect when you come in.</p>
+        </div>
+        <div class="why-points">
+          <article class="why-point">
+            <div class="why-point-num">01</div>
+            <div><h3>A look that feels like you</h3><p>Talk through what you want with your barber and find a style that works for you.</p></div>
+          </article>
+          <article class="why-point">
+            <div class="why-point-num">02</div>
+            <div><h3>Care in the details</h3><p>From the first trim to the finishing touches, your cut gets thoughtful attention.</p></div>
+          </article>
+          <article class="why-point">
+            <div class="why-point-num">03</div>
+            <div><h3>Trusted by local customers</h3><p>Wow-Look has a 4.7 Google rating and more than 110 customer reviews.</p></div>
+          </article>
+          <article class="why-point">
+            <div class="why-point-num">04</div>
+            <div><h3>Book on your schedule</h3><p>View available services and appointment times through the shop’s Vagaro booking page.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="reviews">
+      <div class="wrap reviews-layout">
+        <div>
+          <div class="eyebrow">Good word travels</div>
+          <h2>WHAT OUR<br>CLIENTS SAY</h2>
+          <p class="section-intro">See what Houston customers are saying about Wow-Look Barber Shop on Google.</p>
+          <a class="button button-outline" href="https://www.google.com/maps/search/?api=1&query=Wow-Look+Barber+Shop+Houston+TX+reviews" target="_blank" rel="noopener">View all Google reviews <span aria-hidden="true">↗</span></a>
+        </div>
+        <div>
+          <div class="rating-panel">
+            <div class="rating-number">4.7</div>
+            <div class="rating-stars large" aria-label="Google rating">★★★★★</div>
+            <p>Google rating&nbsp; · &nbsp;110+ customer reviews</p>
+          </div>
+          <div class="reviews-note">
+            “Read the latest customer feedback and decide if Wow-Look is the right fit for your next visit.”
+            <small>View current reviews on Google</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="wrap about-layout">
+        <div class="about-photo">
+          <img src="https://www.designarena.ai/u/c4e56580-9284-4346-af2c-65c91992ea68" alt="Barbers and clients at work inside Wow-Look Barber Shop in Houston" loading="lazy">
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow">A neighborhood barbershop</div>
+          <h2>ABOUT<br>WOW-LOOK</h2>
+          <p>Wow-Look Barber Shop is a local barbershop serving Houston’s Spring Branch community. The shop offers barbering and grooming services in a welcoming, working barbershop setting.</p>
+          <p>With a 4.7 Google rating and more than 110 customer reviews, Wow-Look has earned strong feedback from customers. Browse the available services and book your next appointment online.</p>
+          <div class="about-signoff">See you in the chair.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section location" id="location">
+      <div class="wrap location-layout">
+        <div class="location-copy">
+          <div class="eyebrow">Come by the shop</div>
+          <h2>FIND US</h2>
+          <p class="section-intro">Find Wow-Look Barber Shop in Houston, Texas. Open the map listing for the verified street address, current contact details, and directions.</p>
+          <div class="location-detail">
+            <b>LOCATION</b>
+            <span>Spring Branch community<br>Houston, TX</span>
+          </div>
+          <div class="location-detail">
+            <b>CONTACT &amp; DIRECTIONS</b>
+            <a href="https://www.google.com/maps/search/?api=1&query=Wow-Look+Barber+Shop+Houston+TX" target="_blank" rel="noopener">View verified shop listing on Google Maps ↗</a>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="button" href="https://www.google.com/maps/dir/?api=1&destination=Wow-Look+Barber+Shop+Houston+TX" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" style="border-color:#777;color:#171814" href="https://www.google.com/maps/search/?api=1&query=Wow-Look+Barber+Shop+Houston+TX+phone" target="_blank" rel="noopener">Call now <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="map-frame">
+          <iframe title="Map showing Wow-Look Barber Shop in Houston, Texas" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Wow-Look%20Barber%20Shop%2C%20Houston%2C%20TX&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="wrap final-cta-inner">
+        <div>
+          <div class="eyebrow">Your chair is waiting</div>
+          <h2>Make time for a fresh look.</h2>
+        </div>
+        <a class="button" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book an appointment <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-main">
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark"><span>W</span></span><span>WOW-LOOK</span>
+          </a>
+          <p class="footer-brand-copy">Professional barbering and grooming in Houston’s Spring Branch community.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#reviews">Reviews</a>
+        </div>
+        <div class="footer-col">
+          <h3>Visit</h3>
+          <a href="#location">Houston, TX</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Wow-Look+Barber+Shop+Houston+TX" target="_blank" rel="noopener">Get directions ↗</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Wow-Look+Barber+Shop+Houston+TX+phone" target="_blank" rel="noopener">Call the shop ↗</a>
+        </div>
+        <div class="footer-col">
+          <h3>Make it official</h3>
+          <p>Choose a service and appointment time online.</p>
+          <a class="button" style="min-height:42px;margin-top:4px" href="https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services" target="_blank" rel="noopener">Book an appointment ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Wow-Look Barber Shop</span>
+        <span>Houston, Texas · Spring Branch</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">×</button>
+    <img id="lightboxImage" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const vagaroUrl = "https://www.vagaro.com/googlemap/U2FsdGVkX186F28c1VesjXp7G4-Xp9kH94SAWCClNPM=/services";
+    const serviceData = {
+      haircuts: [
+        { title: "Classic Haircut", description: "A tailored haircut shaped to your preferred style and finished with clean details.", index: "01" },
+        { title: "Fade & Taper", description: "A clean blend with a considered finish, shaped to suit your look.", index: "02" },
+        { title: "Kids’ Haircut", description: "A fresh, comfortable cut for younger clients.", index: "03" },
+        { title: "Haircut & Style", description: "A complete haircut experience with styling to finish.", index: "04" },
+        { title: "Shape-Up", description: "A crisp outline and tidy-up to keep your look in shape.", index: "05" },
+        { title: "Custom Cut", description: "Bring your idea and talk it through with your barber.", index: "06" }
+      ],
+      grooming: [
+        { title: "Beard Trim", description: "A neat trim to bring definition and balance to your beard.", index: "01" },
+        { title: "Beard Shape & Line-Up", description: "Clean lines and a considered shape to complement your cut.", index: "02" },
+        { title: "Shave & Grooming", description: "Traditional grooming services for a clean, refreshed finish.", index: "03" },
+        { title: "Haircut & Beard", description: "A coordinated cut and beard tidy-up in one visit.", index: "04" },
+        { title: "Mustache Trim", description: "A simple detail-focused trim to keep things tidy.", index: "05" },
+        { title: "Finishing Touches", description: "Ask your barber about grooming details available at the shop.", index: "06" }
+      ],
+      specialty: [
+        { title: "Specialty Haircut", description: "A personalized style appointment. Share your reference or idea with your barber.", index: "01" },
+        { title: "Design & Detail", description: "Ask about available hair designs and detailing when you book.", index: "02" },
+        { title: "Color Services", description: "Explore current specialty options and availability through Vagaro.", index: "03" },
+        { title: "Scalp & Grooming Care", description: "Ask the shop about available care options for your visit.", index: "04" },
+        { title: "Consultation", description: "Not sure what to book? Start a conversation about the look you want.", index: "05" },
+        { title: "More at Wow-Look", description: "See the complete, current service list and booking options online.", index: "06" }
+      ]
+    };
+    const serviceList = document.getElementById("serviceList");
+    function renderServices(category) {
+      serviceList.innerHTML = serviceData[category].map(item => `
+        <article class="service-card">
+          <div>
+            <div class="service-card-top"><h3>${item.title}</h3><span class="service-index">${item.index}</span></div>
+            <p>${item.description}</p>
+          </div>
+          <div class="service-footer"><span>By appointment</span><a class="text-link" href="${vagaroUrl}" target="_blank" rel="noopener">Book service ↗</a></div>
+        </article>
+      `).join("");
+    }
+    renderServices("haircuts");
+    document.querySelectorAll(".service-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".service-tab").forEach(other => other.setAttribute("aria-selected", String(other === tab)));
+        renderServices(tab.dataset.category);
+      });
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }));
+
+    const topbar = document.getElementById("topbar");
+    window.addEventListener("scroll", () => topbar.classList.toggle("scrolled", window.scrollY > 30), { passive: true });
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.classList.remove("no-scroll");
+      lightboxImage.src = "";
+    }
+    document.querySelectorAll(".gallery-item").forEach(item => item.addEventListener("click", () => {
+      const image = item.querySelector("img");
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = item.dataset.caption;
+      lightbox.classList.add("open");
+      document.body.classList.add("no-scroll");
+      document.getElementById("lightboxClose").focus();
+    }));
+    document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox(); });
+
+    const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const observedSections = document.querySelectorAll("main section[id]");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sectionLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    observedSections.forEach(section => observer.observe(section));
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
